@@ -1,8 +1,6 @@
-library(readxl)
-# Failure_DTG_kenya
+# corefx
+
+Second-line ART / DTG analytical workflows (Western Kenya cohort).
 
 <!-- badges: start -->
 <!-- badges: end -->
-
-The goal of Failure_DTG_kenya is to ...
-
