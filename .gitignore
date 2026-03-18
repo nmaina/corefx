@@ -33,11 +33,13 @@ remove_documents_from_git.ps1
 *.shp
 *.dbf
 
-#nothing from these folders
-AI/*
-GIS/*
-Images/*
-Graphics/*
-Data/*
-Dataout/*
-Documents/*
+# Local / data folders (entire tree — not on GitHub)
+# Trailing / = ignore the folder and everything inside
+Documents/
+AI/
+GIS/
+Images/
+Graphics/
+Data/
+Dataout/
+Data_public/
