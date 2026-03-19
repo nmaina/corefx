@@ -230,7 +230,7 @@ This avoids immortal time (no follow-up before T0) and limits bias from “switc
 - Demographics: birthdate, age at T0, gender.  
 - First-line: first_line_start_date, duration on first line, first-line regimen (if available).  
 - At second-line start: WHO stage, baseline CD4, VL at/before switch, advanced HIV disease (CD4 &lt;200 or WHO III/IV).  
-- Adherence (if available at T0 or prior): Morisky score, adherence_rating.  
+- Adherence (if available at T0 or prior): Morisky score (MMAS-8 and/or MMAS-4 where available), adherence_rating.  
 - TB/rifampicin, pregnancy (if relevant for channeling).  
 - **Date of HIV diagnosis** (if available) for duration of HIV at T0.
 
@@ -246,6 +246,39 @@ All baseline variables must be defined using information **at or before T0** onl
 
 - **Regimen switch:** Date of first change of anchor or NRTI backbone after T0 (if available).  
 - **Transfer, LTFU:** As per status and dates in EMR.
+
+### 6.6 Variable list for the study cohort (`df_analysis`)
+
+The cleaned cohort used by the analysis scripts is `df_analysis` (one row per patient) produced by `Scripts/read_clean_01.R`. The lists below match what is required/checked for the initial descriptive and comparison analyses.
+
+#### Virological outcomes only (minimum)
+- `de_identified`
+- `second_line_start_date` (T0)
+- `first_line_start_date` (for the >=6 months ART criterion)
+- `arv_regimen_2nd_line_start` (raw regimen string)
+- `regimen_anchor` (DTG vs PI vs Other)
+- `nrti_backbone` (TDF vs AZT vs ABC)
+- `birthdate` (to derive `age_second_line`)
+- `gender`
+- `who_stage`
+- `baseline_cd4`
+- `advanced_hiv_disease`
+- `adherence_rating` (if available)
+- `morisky_mmas8` (if available)
+- `morisky_mmas4` (if available)
+- `date_hiv_diagnosis` (to derive `years_since_hiv_diagnosis`, if available)
+- `vl_status` (Suppressed/Unsuppressed)
+- `viral_suppressed` (derived from `vl_status`)
+- `latest_vl_date` (to derive `fu_years`)
+- `fu_years`
+
+#### Virological + clinical outcomes (add the clinical variables)
+- `reason_for_exit`
+- `cause_of_death`
+- `status` (derived in the cleaning script)
+- `clinical_status` (alias of `status`)
+
+Note: in the current implementation, `reason_for_exit` is also used as part of the censoring/clinical-status definition logic.
 
 ---
 
